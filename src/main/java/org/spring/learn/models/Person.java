@@ -2,45 +2,48 @@ package org.spring.learn.models;
 
 import jakarta.validation.constraints.*;
 
+
 public class Person {
-    private int id;
+
+    private int personId;
 
     @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    private String name;
+    @Size(min = 3, max = 100, message = "Name should be between 2 and 30 characters")
+    private String fullName;
 
     @Min(value = 0, message = "Age should be greater than 0")
     private int age;
-
-    @NotEmpty(message = "Email should not be empty")
-    @Email(message = "Email should be valid")
-    private String email;
 
     public Person() {
 
     }
 
-    public Person(int id, String name, int age, String email) {
-        this.id = id;
-        this.name = name;
+    public Person(String fullName, int age) {
+        this.fullName = fullName;
         this.age = age;
-        this.email = email;
     }
 
-    public int getId() {
-        return id;
+    public Person(int id, String fullName, int age) {
+        this.personId = id;
+        this.fullName = fullName;
+        this.age = age;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+    public int getPersonId() {
+        return personId;
     }
 
-    public String getName() {
-        return name;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public int getAge() {
@@ -49,13 +52,5 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

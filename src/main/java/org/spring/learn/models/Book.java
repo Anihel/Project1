@@ -2,35 +2,35 @@ package org.spring.learn.models;
 
 public class Book {
 
-    private int book_id;
-    private String name;
+    private int bookId;
+    private String bookname;
     private String author;
     private int year;
 
     public Book() {
     }
 
-    public Book(int book_id, String name, String author, int year) {
-        this.book_id = book_id;
-        this.name = name;
+    public Book(int book_id, String bookname, String author, int year) {
+        this.bookId = book_id;
+        this.bookname = bookname;
         this.author = author;
         this.year = year;
     }
 
-    public int getBook_id() {
-        return book_id;
+    public int getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
-    public String getName() {
-        return name;
+    public String getBookname() {
+        return bookname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBookname(String bookname) {
+        this.bookname = bookname;
     }
 
     public String getAuthor() {
