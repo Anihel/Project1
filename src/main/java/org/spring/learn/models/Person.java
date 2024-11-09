@@ -12,40 +12,18 @@ public class Person {
     @Min(value = 0, message = "Age should be greater than 0")
     private int age;
 
-    @NotEmpty(message = "Name should not be empty")
+    @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     private String email;
 
-    // Страна, Город, Индекс (6 цифры)
-    // Russia, Moscow, 123456
-    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Your address should be in this format: " +
-            "Country, City, Postal Code(6 digits)")
-    private String address;
+    public Person() {
 
-    public Person(int id, String name, int age, String email, String address) {
+    }
+
+    public Person(int id, String name, int age, String email) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.email = email;
-        this.address = address;
-    }
-
-    public Person() {
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -65,11 +43,19 @@ public class Person {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public int getAge() {
+        return age;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
