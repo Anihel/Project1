@@ -20,13 +20,14 @@
 
 </div>
 
+<hr/>
 
 <form th:action="@{/people/{id}/edit(id=${person.getPersonId()})}">
     <input type="submit" value="Редактировать">
 </form>
 
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPersonId()})}">
-    <input type="submit" value="Удалить"/>
+    <input style="color: darkred" type="submit" value="Удалить"/>
 </form>
 </body>
 </html>
