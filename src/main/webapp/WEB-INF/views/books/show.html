@@ -5,14 +5,35 @@
     <title>Show</title>
 </head>
 <body>
-<p th:text="${'Name book: ' + book.bookname}">value</p>
-<p th:text="${'Author: ' + book.getAuthor()}">value</p>
-<p th:text="${'Year: ' + book.getYear()}">value</p>
+<a href="/books">Назад</a>
+<br/>
+<hr/>
+<p>
+    <strong>Название книги: </strong><span th:text="${book.bookname}">Book Name</span>
+</p>
+<p>
+   <strong>Автор: </strong><span th:text="${book.getAuthor()}">Author</span>
+</p>
+<p>
+    <strong>Год издания: </strong><span th:text="${book.getYear()}">Author</span>
+</p>
 
 
 <form th:method="PATCH" th:if="${book.getPersonid()}" th:action="@{/books/{id}/clear(id=${book.getBookId()})}">
-    <p th:text="${'Книга сейчас находится у: ' + person.getFullName()}"></p>
+    <p>
+        <strong>Книга сейчас находится у: </strong><span th:text="${person.getFullName()}">B</span>
+    </p>
     <input type="submit" value="Освободить книгу">
+</form>
+
+
+<form th:method="PATCH" th:unless="${book.getPersonid()}" th:action="@{{id}/addOwner(id=${book.getBookId()})}">
+    <label for="person">Выберите человека</label>
+    <select id="person" name="personId">
+        <option th:each="person : ${people}" th:value="${person.getPersonId()}" name="personId" th:text="${person.getFullName()}"></option>
+
+    </select>
+    <button type="submit">Отдать книгу</button>
 </form>
 
 
@@ -24,6 +45,10 @@
     <input style="color: darkred" type="submit" value="Удалить">
 </form>
 
+<br/>
+<hr/>
+
+<a href="/">Главная</a>
 
 
 </body>

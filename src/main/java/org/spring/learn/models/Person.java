@@ -7,11 +7,11 @@ public class Person {
 
     private int personId;
 
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 3, max = 100, message = "Name should be between 2 and 30 characters")
+    @NotEmpty(message = "Имя не должно быть пустым")
+    @Size(min = 3, max = 100, message = " Имя должно быть не короче 2 символов и не длиннее 30")
     private String fullName;
 
-    @Min(value = 0, message = "Age should be greater than 0")
+//    @Min(value = 1900, message = "Г")
     private int age;
 
     public Person() {

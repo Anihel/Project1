@@ -26,6 +26,7 @@ public class BookController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("books", bookDAO.index());
+        model.addAttribute("people", personDAO.index());
         return "books/index";
     }
 
@@ -33,6 +34,7 @@ public class BookController {
     public String show(@PathVariable("id") int id, Model model) {
         Book book = bookDAO.show(id);
         model.addAttribute("book", book);
+        model.addAttribute("people", personDAO.index());
         if (book.getPersonid() != null)
             model.addAttribute("person", personDAO.show(Integer.parseInt(book.getPersonid())));
         return "books/show";
@@ -79,9 +81,14 @@ public class BookController {
 
     @PatchMapping("{id}/clear")
     public String clear(@PathVariable("id")int id) {
-        System.out.println(id);
         bookDAO.clearBook(id);
+        return "redirect:/books";
+    }
 
-        return "redirect:/books/" + id;
+    @PatchMapping("{bookId}/addOwner")
+    public String addPerson(@PathVariable("bookId")int idBook, @RequestParam("personId") String personId){
+        bookDAO.addOwner(idBook, Integer.parseInt(personId));
+
+        return "redirect:/books";
     }
 }

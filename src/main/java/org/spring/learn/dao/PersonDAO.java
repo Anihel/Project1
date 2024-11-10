@@ -49,4 +49,9 @@ public class PersonDAO {
                 (rs, rowNum) -> rs.getString("bookname"));
     }
 
+    public Person show(String email) {
+        return jdbcTemplate.query("select * from Person WHERE email=?", new Object[]{email},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+    }
+
 }
