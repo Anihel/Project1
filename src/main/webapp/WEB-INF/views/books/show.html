@@ -26,15 +26,16 @@
     <input type="submit" value="Освободить книгу">
 </form>
 
+<div th:unless="${book.getPersonid()}">
+    <form th:object="${personM}" th:method="PATCH" th:action="@{{id}/addOwner(id=${book.getBookId()})}">
+        <label for="person">Выберите человека</label>
+        <select th:field="*{personId}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getPersonId()}" th:text="${person.getFullName()}"></option>
+        </select>
+        <button type="submit">Отдать книгу</button>
+    </form>
+</div>
 
-<form th:method="PATCH" th:unless="${book.getPersonid()}" th:action="@{{id}/addOwner(id=${book.getBookId()})}">
-    <label for="person">Выберите человека</label>
-    <select id="person" name="personId">
-        <option th:each="person : ${people}" th:value="${person.getPersonId()}" name="personId" th:text="${person.getFullName()}"></option>
-
-    </select>
-    <button type="submit">Отдать книгу</button>
-</form>
 
 
 <hr/>

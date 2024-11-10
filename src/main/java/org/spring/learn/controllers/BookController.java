@@ -31,7 +31,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, Model model, @ModelAttribute("personM") Person person) {
         Book book = bookDAO.show(id);
         model.addAttribute("book", book);
         model.addAttribute("people", personDAO.index());
@@ -82,13 +82,13 @@ public class BookController {
     @PatchMapping("{id}/clear")
     public String clear(@PathVariable("id")int id) {
         bookDAO.clearBook(id);
-        return "redirect:/books";
+        return "redirect:/books/" + id;
     }
 
     @PatchMapping("{bookId}/addOwner")
-    public String addPerson(@PathVariable("bookId")int idBook, @RequestParam("personId") String personId){
-        bookDAO.addOwner(idBook, Integer.parseInt(personId));
+    public String addPerson(@PathVariable("bookId")int idBook, @ModelAttribute("personM") Person person){
+        bookDAO.addOwner(idBook, person.getPersonId());
 
-        return "redirect:/books";
+        return "redirect:/books/" + idBook;
     }
 }
