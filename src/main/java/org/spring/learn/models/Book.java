@@ -3,15 +3,15 @@ package org.spring.learn.models;
 public class Book {
 
     private int bookId;
+    private String personid = null;
     private String bookname;
     private String author;
     private int year;
-    private int personid = 0;
 
     public Book() {
     }
 
-    public Book(int book_id, int personid, String bookname, String author, int year) {
+    public Book(int book_id, String personid, String bookname, String author, int year) {
         this.bookId = book_id;
         this.personid = personid;
         this.bookname = bookname;
@@ -19,11 +19,11 @@ public class Book {
         this.year = year;
     }
 
-    public int getPersonid() {
+    public String getPersonid() {
         return personid;
     }
 
-    public void setPersonid(int personid) {
+    public void setPersonid(String personid) {
         this.personid = personid;
     }
 

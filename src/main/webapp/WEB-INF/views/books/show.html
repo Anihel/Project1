@@ -8,9 +8,12 @@
 <p th:text="${'Name book: ' + book.bookname}">value</p>
 <p th:text="${'Author: ' + book.getAuthor()}">value</p>
 <p th:text="${'Year: ' + book.getYear()}">value</p>
-<p th:text="${'person id: ' + book.getPersonid()}">value</p>
 
 
+<form th:method="PATCH" th:if="${book.getPersonid()}" th:action="@{/books/{id}/clear(id=${book.getBookId()})}">
+    <p th:text="${'Книга сейчас находится у: ' + person.getFullName()}"></p>
+    <input type="submit" value="Освободить книгу">
+</form>
 
 
 <hr/>

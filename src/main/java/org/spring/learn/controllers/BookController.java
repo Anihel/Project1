@@ -1,6 +1,7 @@
 package org.spring.learn.controllers;
 
 import org.spring.learn.dao.BookDAO;
+import org.spring.learn.dao.PersonDAO;
 import org.spring.learn.models.Book;
 import org.spring.learn.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     private final BookDAO bookDAO;
+    private final PersonDAO personDAO;
 
     @Autowired
-    public BookController(BookDAO bookDAO) {
+    public BookController(BookDAO bookDAO, PersonDAO personDAO) {
         this.bookDAO = bookDAO;
+        this.personDAO = personDAO;
     }
 
     @GetMapping()
@@ -28,8 +31,10 @@ public class BookController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("book", bookDAO.show(id));
-
+        Book book = bookDAO.show(id);
+        model.addAttribute("book", book);
+        if (book.getPersonid() != null)
+            model.addAttribute("person", personDAO.show(Integer.parseInt(book.getPersonid())));
         return "books/show";
     }
 
@@ -70,5 +75,13 @@ public class BookController {
     public String delete(@PathVariable("id") int id) {
         bookDAO.delete(id);
         return "redirect:/books";
+    }
+
+    @PatchMapping("{id}/clear")
+    public String clear(@PathVariable("id")int id) {
+        System.out.println(id);
+        bookDAO.clearBook(id);
+
+        return "redirect:/books/" + id;
     }
 }
