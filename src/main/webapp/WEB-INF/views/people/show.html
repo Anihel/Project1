@@ -6,12 +6,27 @@
 </head>
 <body>
 <p th:text="${person.getFullName() + ', ' + person.getAge()}">VALUE</p>
-<p th:text="${person.getPersonId()}">VALUE</p>
+<div th:if="${listBooks.isEmpty()}">
+    <p>Человека пока не взял ни одной книги</p>
+</div>
 
-<a th:href="@{/people/{id}/edit(id=${person.getPersonId()})}">Edit</a>
+<div th:unless="${listBooks.isEmpty()}">
+    <h3>Список книг:</h3>
+    <ul>
+        <li th:each="book : ${listBooks}">
+            <span th:text="${book}"></span>
+        </li>
+    </ul>
+
+</div>
+
+
+<form th:action="@{/people/{id}/edit(id=${person.getPersonId()})}">
+    <input type="submit" value="Редактировать">
+</form>
 
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPersonId()})}">
-    <input type="submit" value="Delete"/>
+    <input type="submit" value="Удалить"/>
 </form>
 </body>
 </html>

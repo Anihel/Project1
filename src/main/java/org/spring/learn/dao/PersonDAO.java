@@ -44,4 +44,9 @@ public class PersonDAO {
         jdbcTemplate.update("DELETE FROM Person WHERE personid=?", id);
     }
 
+    public List<String> getBooks(int id) {
+        return jdbcTemplate.query("SELECT bookname FROM Person JOIN Book USING(personid) WHERE book.personid=?", new Object[]{id},
+                (rs, rowNum) -> rs.getString("bookname"));
+    }
+
 }
